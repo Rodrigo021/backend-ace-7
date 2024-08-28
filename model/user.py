@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from utils.encode import encrypt_pass, decrypt_pass
 
 # Configuração do SQLAlchemy
-DATABASE_URL = "postgresql+psycopg2://postgres:Rodrigo2003@localhost:5432/ace"
+DATABASE_URL = "postgresql+psycopg2://seu_usuario:sua_senha@localhost:5432/seu_banco"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
