@@ -9,8 +9,9 @@ def cadastrar_usuario():
     dados = request.json
     nome = dados.get("nome")
     senha = dados.get("senha")
-    cargo = dados.get("cargo")
-    resultado = sistema.cadastrar_usuario(nome, senha, cargo)
+    sistema_ids = dados.get("sistema", [])
+    cargos_do_sistema = dados.get("cargos_do_sistema", [])
+    resultado = sistema.cadastrar_usuario(nome, senha, sistema_ids, cargos_do_sistema)
     return jsonify(resultado)
 
 @app.route('/atualizar/<int:user_id>', methods=['PUT'])
@@ -18,8 +19,9 @@ def atualizar_usuario(user_id):
     dados = request.json
     nome = dados.get("nome")
     senha = dados.get("senha")
-    cargo = dados.get("cargo")
-    resultado = sistema.atualizar_usuario(user_id, nome, senha, cargo)
+    sistema_ids = dados.get("sistema", [])
+    cargos_do_sistema = dados.get("cargos_do_sistema", [])
+    resultado = sistema.atualizar_usuario(user_id, nome, senha, sistema_ids, cargos_do_sistema)
     return jsonify(resultado)
 
 @app.route('/deletar/<int:user_id>', methods=['DELETE'])
@@ -47,9 +49,14 @@ def obter_nome(user_id):
     resultado = sistema.obter_nome(user_id)
     return jsonify(resultado)
 
-@app.route('/cargo/<int:user_id>', methods=['GET'])
-def obter_cargo(user_id):
-    resultado = sistema.obter_cargo(user_id)
+@app.route('/sistema/<int:user_id>', methods=['GET'])
+def obter_sistema(user_id):
+    resultado = sistema.obter_sistema(user_id)
+    return jsonify(resultado)
+
+@app.route('/cargos_do_sistema/<int:user_id>', methods=['GET'])
+def obter_cargos_do_sistema(user_id):
+    resultado = sistema.obter_cargos_do_sistema(user_id)
     return jsonify(resultado)
 
 if __name__ == '__main__':
